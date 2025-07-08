@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 import { 
   X, 
-  Server, 
-  Key, 
-  Database, 
-  Globe, 
-  Activity,
   CheckCircle, 
-  XCircle, 
   AlertTriangle
 } from 'lucide-react';
 import { useN8n } from '../hooks/useN8n';
@@ -26,12 +21,9 @@ export const ConnectionSetup = ({ isOpen, onClose }: ConnectionSetupProps) => {
   const [testMessage, setTestMessage] = useState<string>('');
   
   const { 
-    connections,
     activeConnection,
-    loading,
     testConnection,
-    saveConnection,
-    deleteConnection
+    saveConnection
   } = useN8n();
 
   useEffect(() => {
@@ -59,7 +51,7 @@ export const ConnectionSetup = ({ isOpen, onClose }: ConnectionSetupProps) => {
         setTestStatus('error');
         setTestMessage(response.message || 'Connection failed');
       }
-    } catch (_) {
+    } catch (error) {
       setTestStatus('error');
       setTestMessage('Connection failed. Please check your credentials.');
     }
@@ -79,7 +71,7 @@ export const ConnectionSetup = ({ isOpen, onClose }: ConnectionSetupProps) => {
       } else {
         toast.error(response.message || 'Failed to save connection');
       }
-    } catch (_) {
+    } catch (error) {
       toast.error('Failed to save connection');
     }
   };

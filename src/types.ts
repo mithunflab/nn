@@ -20,7 +20,7 @@ export interface N8nWorkflow {
   tags: string[];
   createdAt: string;
   updatedAt: string;
-  nodes?: any[];
+  nodes: any[];
   connections?: any;
   staticData?: any;
   settings?: any;

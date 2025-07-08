@@ -1,23 +1,22 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   Settings, 
   Bell, 
   Shield, 
   CreditCard, 
-  Download, 
-  Upload, 
   LogOut, 
-  User as UserIcon, 
-  Save, 
-  Edit2, 
-  ChevronRight,
-  Zap,
-  Crown
+  User as UserIcon
 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { authService } from '../lib/supabase';
 
-const ProfilePage = ({ isOpen, onClose }) => {
+interface ProfilePageProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const ProfilePage = ({ isOpen, onClose }: ProfilePageProps) => {
   const { user, signOut } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -48,7 +47,7 @@ const ProfilePage = ({ isOpen, onClose }) => {
     try {
       if (!user) throw new Error('Not authenticated');
       
-      const { data } = await authService.updateUser({
+      await authService.updateUser({
         data: {
           fullName: profileData.fullName,
           username: profileData.username,
@@ -92,7 +91,6 @@ const ProfilePage = ({ isOpen, onClose }) => {
                 Email Address
               </label>
               <input
-                id="profile-email"
                 type="email"
                 value={user?.email || ''}
                 disabled
@@ -105,7 +103,6 @@ const ProfilePage = ({ isOpen, onClose }) => {
                 Full Name
               </label>
               <input
-                id="profile-fullName"
                 name="fullName"
                 type="text"
                 value={profileData.fullName}
@@ -122,7 +119,6 @@ const ProfilePage = ({ isOpen, onClose }) => {
                 Username
               </label>
               <input
-                id="profile-username"
                 name="username"
                 type="text"
                 value={profileData.username}
@@ -139,7 +135,6 @@ const ProfilePage = ({ isOpen, onClose }) => {
                 Website
               </label>
               <input
-                id="profile-website"
                 name="website"
                 type="text"
                 value={profileData.website}
@@ -156,7 +151,6 @@ const ProfilePage = ({ isOpen, onClose }) => {
                 Location
               </label>
               <input
-                id="profile-location"
                 name="location"
                 type="text"
                 value={profileData.location}

@@ -22,7 +22,6 @@ interface ChatMessage {
 }
 
 const AIPlayground = () => {
-  const [activeTab, setActiveTab] = useState<'chat' | 'workflow'>('chat');
   const [workflowJson, setWorkflowJson] = useState<string | null>(null);
   const [workflowId, setWorkflowId] = useState<string | null>(null);
   const [isExecuting, setIsExecuting] = useState(false);
@@ -37,7 +36,6 @@ const AIPlayground = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   // Mock speech-to-text functionality since we don't have useSpeechToText
   const startRecording = () => {
@@ -63,7 +61,6 @@ const AIPlayground = () => {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsGenerating(true);
-    setError(null);
 
     try {
       let tools: ("web_search" | "workflow_generation" | "analysis")[] = [];
@@ -93,7 +90,6 @@ const AIPlayground = () => {
 
       if (data.workflow) {
         setWorkflowJson(JSON.stringify(data.workflow, null, 2));
-        setActiveTab('workflow');
       }
 
       const aiMessage: ChatMessage = {
@@ -106,7 +102,7 @@ const AIPlayground = () => {
       setMessages(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
-      setError('Failed to send message. Please try again.');
+      toast.error('Failed to send message. Please try again.');
     } finally {
       setIsGenerating(false);
     }

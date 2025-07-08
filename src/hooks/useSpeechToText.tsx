@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 interface UseSpeechToTextOptions {
   onTranscription?: (text: string) => void;
@@ -9,7 +9,7 @@ interface UseSpeechToTextOptions {
 export const useSpeechToText = (options?: UseSpeechToTextOptions) => {
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
 
   // Mock implementation since we don't have the actual speech recognition implementation
   const startRecording = useCallback(() => {
