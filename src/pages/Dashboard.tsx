@@ -5,21 +5,13 @@ import {
   Filter, 
   MoreVertical, 
   Play, 
-  Pause, 
   Edit, 
   Trash2, 
-  Download, 
-  Upload, 
-  BarChart3, 
-  Settings, 
   Bell, 
   User, 
   LogOut, 
   Zap, 
   CheckCircle, 
-  Clock, 
-  AlertTriangle, 
-  TrendingUp, 
   Activity, 
   Database, 
   Globe,
@@ -40,12 +32,10 @@ import { ConnectionSetup } from '../components/ConnectionSetup';
 import { ProfilePage } from '../components/ProfilePage';
 import Logo from '../components/Logo';
 
-interface DashboardProps {
-  
-}
+type View = 'dashboard' | 'playground' | 'mcp-servers';
 
 export const Dashboard = () => {
-  const [currentView, setCurrentView] = useState<'dashboard' | 'playground' | 'mcp-servers'>('dashboard');
+  const [currentView, setCurrentView] = useState<View>('dashboard');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -62,14 +52,10 @@ export const Dashboard = () => {
     activeConnection, 
     workflows, 
     executions,
-    connectToN8n,
-    disconnectFromN8n,
     createWorkflow,
     updateWorkflow,
     deleteWorkflow,
     executeWorkflow,
-    getWorkflows,
-    getExecutions,
     healthCheck
   } = useN8n();
 

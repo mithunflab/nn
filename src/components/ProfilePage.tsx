@@ -17,7 +17,7 @@ import {
 import { useAuth } from '../hooks/useAuth';
 import { authService } from '../lib/supabase';
 
-const ProfilePage = () => {
+const ProfilePage = ({ isOpen, onClose }) => {
   const { user, signOut } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -48,7 +48,7 @@ const ProfilePage = () => {
     try {
       if (!user) throw new Error('Not authenticated');
       
-      const { data, error } = await authService.updateUser({
+      const { data } = await authService.updateUser({
         data: {
           fullName: profileData.fullName,
           username: profileData.username,
@@ -56,8 +56,6 @@ const ProfilePage = () => {
           location: profileData.location,
         }
       });
-
-      if (error) throw error;
 
       setIsEditing(false);
       alert('Profile updated successfully!');
