@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   X, 
@@ -30,7 +31,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   const [mode, setMode] = useState<AuthMode>('signin');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [socialLoading, setSocialLoading] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   
   const [formData, setFormData] = useState({
@@ -114,23 +114,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     }
   };
 
-  const handleSocialAuth = async (provider: 'google' | 'github') => {
-    setSocialLoading(provider);
-    setErrors({});
-    
-    try {
-      const { error } = await authService.signInWithProvider(provider);
-      if (error) {
-        setErrors({ general: error.message });
-      }
-      // Note: OAuth will redirect, so we don't need to handle success here
-    } catch (error) {
-      setErrors({ general: 'An unexpected error occurred. Please try again.' });
-    } finally {
-      setSocialLoading(null);
-    }
-  };
-
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     // Clear field error when user starts typing
@@ -195,9 +178,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             </div>
           ) : (
             <>
-              
-
-              
               {/* Email/Password Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Email Field */}

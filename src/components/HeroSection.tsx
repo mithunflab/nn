@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mic, Play, BarChart3, Globe, Zap, Infinity, Rocket, ChevronDown } from 'lucide-react';
+import { Mic, BarChart3, Globe, Zap, Infinity, Rocket, ChevronDown } from 'lucide-react';
 import {AuthModal} from './AuthModal';
 import { useAuth } from '../hooks/useAuth';
 import Logo from './Logo';
@@ -9,7 +9,6 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onDashboardClick }) => {
-  const [isListening, setIsListening] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [animateStats, setAnimateStats] = useState(false);
@@ -38,8 +37,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onDashboardClick }) => {
       clearTimeout(timer);
     };
   }, []);
-
- 
 
   const handleStartBuildingClick = () => {
     if (user && onDashboardClick) {
@@ -118,7 +115,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onDashboardClick }) => {
               aria-label="View Demo"
             >
               <span className="group-hover:scale-110 transition-transform duration-300">
-                <Play className="w-5 h-5" />
+                <Globe className="w-5 h-5" />
               </span>
               <span>View Demo</span>
             </button>

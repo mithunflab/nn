@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { authService } from '../lib/supabase';
 import type { User, Session } from '@supabase/supabase-js';
@@ -30,7 +31,7 @@ export const useAuth = () => {
 
     // Listen for auth changes
     const { data: { subscription } } = authService.onAuthStateChange(
-      (event, session) => {
+      (_event, session) => {
         setAuthState({
           user: session?.user ?? null,
           session: session,

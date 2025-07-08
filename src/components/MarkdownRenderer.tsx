@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -12,7 +13,6 @@ import {
   Download,
   Eye,
   EyeOff,
-  Play,
   ExternalLink,
   Zap,
   FileCode,
@@ -26,18 +26,21 @@ interface MarkdownRendererProps {
 }
 
 interface CodeBlockProps {
-  children: string;
+  children?: React.ReactNode;
   className?: string;
   inline?: boolean;
+  [key: string]: any;
 }
 
-const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, inline }) => {
+const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, inline, ...props }) => {
   const [copied, setCopied] = useState(false);
   const [showRaw, setShowRaw] = useState(false);
 
+  // Convert children to string safely
+  const code = String(children || '').replace(/\n$/, '');
+  
   const match = /language-(\w+)/.exec(className || '');
   const language = match ? match[1] : '';
-  const code = String(children).replace(/\n$/, '');
 
   // Determine if this should be collapsed by default
   const isJson = language === 'json' || (language === '' && code.trim().startsWith('{'));
@@ -63,7 +66,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className, inline }) =>
   // For inline code
   if (inline) {
     return (
-      <code className="bg-slate-700/50 text-emerald-400 px-1.5 py-0.5 rounded font-mono text-sm break-words">
+      <code className="bg-slate-700/50 text-emerald-400 px-1.5 py-0.5 rounded font-mono text-sm break-words" {...props}>
         {children}
       </code>
     );
