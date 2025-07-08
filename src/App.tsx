@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Mic, 
-  MicOff, 
   Play, 
   Sparkles, 
   Zap, 
@@ -9,22 +8,17 @@ import {
   Menu, 
   X,
   ArrowRight,
-  MessageSquare,
   Database,
   Globe,
   Heart,
-  User,
   LogOut,
   BarChart3,
   RefreshCw,
   Calendar,
-  Layers,
   MessageCircle,
   AlertCircle,
   HelpCircle,
   Rocket,
-  BookOpen,
-  ExternalLink,
   Shield,
   Users
 } from 'lucide-react';
@@ -35,7 +29,6 @@ import { useAuth } from './hooks/useAuth';
 import Logo from './components/Logo';
 
 function App() {
-  const [isListening, setIsListening] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [pricingModalOpen, setPricingModalOpen] = useState(false);
@@ -61,10 +54,6 @@ function App() {
       window.history.pushState({}, '', '/');
     }
   }, [currentPage, user]);
-
-  const toggleListening = () => {
-    setIsListening(!isListening);
-  };
 
   const handleGetStarted = () => {
     if (user) {
@@ -304,7 +293,7 @@ function App() {
               <div className="text-slate-400 text-sm font-medium tracking-wide">Powered</div>
             </div>
             <div className="group text-center p-6 bg-slate-800/30 backdrop-blur-sm rounded-2xl border border-slate-700/30 hover:border-emerald-500/50 transition-all duration-300 hover:scale-105">
-              <MessageSquare className="w-8 h-8 text-emerald-400 mx-auto mb-3" />
+              <MessageCircle className="w-8 h-8 text-emerald-400 mx-auto mb-3" />
               <div className="text-2xl font-bold text-slate-200 mb-1">Voice</div>
               <div className="text-slate-400 text-sm font-medium tracking-wide">First</div>
             </div>
@@ -959,7 +948,7 @@ function App() {
                 <div className="group bg-gradient-to-br from-slate-800/40 to-slate-900/40 backdrop-blur-sm border border-slate-600/30 rounded-2xl p-6 hover:border-purple-500/40 hover:bg-gradient-to-br hover:from-slate-800/60 hover:to-slate-900/60 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
                   <div className="flex items-start space-x-3 mb-3">
                     <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
-                      <Layers className="w-4 h-4 text-white" />
+                      <Shield className="w-4 h-4 text-white" />
                     </div>
                     <h4 className="font-bold text-slate-50 text-lg group-hover:text-purple-200 transition-colors duration-200">What platforms do you support?</h4>
                   </div>
